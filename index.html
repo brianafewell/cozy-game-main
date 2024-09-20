@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cozy Game</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #EDCDAF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #muteButton{
+        padding: 10px 20px;
+      font-size: 16px;
+      background-color: #EDCDAF;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #muteButton.muted{
+        padding: 10px 20px;
+      font-size: 16px;
+      background-color: #654321;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .image-container {
+      position: relative;
+    }
+
+
+    .image-container img {
+      width: 950px;
+      height: 700px;
+    }
+
+    .button-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+
+    <div class='image-container'>
+        <img id= "myImage" src="dialogueimage22.png" width="950" height="700">
+        <div class='button-container'>
+            <button onclick="nextImage()">Next</button>
+        </div>
+    </div>
+
+
+    <audio id="myAudio" loop>
+        <source src="fallmusic.mp3" type="audio/mp3">
+        <source src="fallmusic2.mp3" type="audio/mp3">
+      </audio>
+
+      <button id="muteButton">Mute</button>
+
+  <script>
+    var imageIndex = 0;
+    var images = ['dialogueimage1.png', 'dialogueimage2.png', 
+        'dialogueimage3.png', 'dialogueimage4.png', 'dialogueimage5.png', 'dialogueimage6.png',
+        'dialogueimage7.png', 'dialogueimage8.png', 'dialogueimage9.png', 'dialogueimage10.png', 
+        'snakeimage10.5.png', 'dialogueimage11.png', 'dialogueimage12.png', 'dialogueimage13.png', 
+        'matchingimage13.5.png', 'dialogueimage14.png', 'dialogueimage15.png', 'dialogueimage16.png',  
+        'leafimage16.5.png', 'dialogueimage17.png', 'dialogueimage18.png', 'dialogueimage19.png', 
+        'dialogueimage20.png', 'dialogueimage21.png', 'dialogueimage22.png'];; // Add more image paths here
+
+    function toggleMute() {
+      var audio = document.getElementById("myAudio");
+      audio.muted = !audio.muted;
+
+      var muteButton = document.getElementById("muteButton");
+      muteButton.textContent = audio.muted ? "Unmute" : "Mute";
+      muteButton.classList.toggle("muted");
+    }
+    function nextImage() {
+      imageIndex++;
+      if (imageIndex >= images.length) {
+        imageIndex = 0;
+      }
+      
+      document.getElementById("myImage").src = images[imageIndex];
+      // Play the first song initially
+    document.getElementById("myAudio").play();
+    document.getElementById("muteButton").addEventListener("click", toggleMute);
+    }
+  </script>
+</body>
+</html>
